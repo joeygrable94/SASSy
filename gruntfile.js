@@ -64,7 +64,8 @@ module.exports = function(grunt) {
 
 	// register tasks
 	grunt.registerTask('default', [
-		'sass:dev'
+		'sass:dev',
+		'watch'
 	]);
 
 	// package project for distribution
