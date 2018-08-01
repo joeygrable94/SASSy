@@ -1,15 +1,15 @@
 // GRUNT
 module.exports = function(grunt) {
 
-	// DIR
-	// development
+	// DIRECTORY: development
 	var dev	= {
 		root: './src',
 		sass: '/sass',
 		css: '/css',
 		vendors: '/vendors'
 	};
-	// production
+
+	// DIRECTORY: production
 	var dist = {
 		root: './dist',
 		css: '/css'
@@ -71,7 +71,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('package', [
 		'sass:dist'
 	]);
-
-
 
 };
