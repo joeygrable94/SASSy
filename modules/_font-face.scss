@@ -1,0 +1,42 @@
+// Font face SASS mixin
+// --------------------------------------------------
+// Generates font-face declaration for multiple file formats.
+// 
+// @author TMMC <http://www.tmmc.pl>
+// @licence MIT <https://opensource.org/licenses/MIT)>
+// 
+// @param $font-family (string) - font family name
+// @param $font-path (string) - path to font files location ending with slash
+// @param $font-file-name (string) - font file name (basename w/out extension)
+// @param $font-style (normal|italic|oblique|inherit) - font style, default `normal`
+// @param $font-weight (string|number) - font weight, default `normal`
+// @param $font-svg-id (string|null) - quoted id for svg font format, default `null`
+// @param $text-rendering (auto|optimizeSpeed|optimizeLegibility|geometricPrecision|null) - font optimization when rendering text, default `null`
+// @param $font-formats (map) - sass map of font formats and extensions to use [font extension: font format string]
+
+@mixin _font-face($font-family, $font-path, $font-file-name, $font-style: normal, $font-weight: normal, $font-svg-id: null, $text-rendering: null, $font-formats: (eot: embedded-opentype, woff2: woff2, woff: woff, ttf: truetype, otf: opentype, svg: svg)) {
+	$font-src: (); // Initiate empty list with values for `src` property.
+
+	@each $font-ext, $font-format in $font-formats { // Loop through font formats.
+		@if ($font-ext == 'eot') {         // If it is eot font (IE). 
+			$font-ext: '#{$font-ext}#iefix'; // Add fix to font extension.
+		} @else if ($font-ext == 'svg' and $font-svg-id != null) { // If it is svg font and id for svg font is not null.
+			$font-ext: '#{$font-ext}##{$font-svg-id}';               // Add id to font extension.
+		}
+		// Append font format to the list of values for `src` property.
+		$font-src: append($font-src, url('#{$font-path}#{$font-file-name}.#{$font-ext}') format('#{$font-format}'), comma);
+	}
+	
+	@at-root {
+		@font-face {
+			font-family: '#{$font-family}';
+			@if (map-has-key($font-formats, eot)) {             // If there is an eot font (IE).
+				src: url('#{$font-path}#{$font-file-name}.eot');  // Add `src` w/out `format` for older IE.
+			}
+			src: $font-src;
+			font-style: $font-style;
+			font-weight: $font-weight;
+			text-rendering: $text-rendering;
+		}
+	}
+}

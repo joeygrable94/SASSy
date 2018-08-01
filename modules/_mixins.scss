@@ -1,0 +1,468 @@
+// SASSY MIXINS
+// 
+// -------------------------
+
+
+
+
+
+// GENERAL
+// ---------------------------------------------------------------------------
+// border-box hack
+@mixin border-box {
+	-webkit-box-sizing: border-box;
+		 -moz-box-sizing: border-box;
+			box-sizing: border-box;
+}
+
+// hide scrollbar
+@mixin scroll-hide() {
+	//&::-webkit-scrollbar { width: 0px; background: transparent; }
+	&::-webkit-scrollbar { width: 1px; height: 1px; }
+	&::-webkit-scrollbar-button { width: 1px; height: 1px; }
+	&::-webkit-scrollbar-thumb { background: transparent; }
+}
+
+
+
+
+
+// TYPOGRAPHY
+// ---------------------------------------------------------------------------
+// fluid type interpolation by https://www.sassmeister.com/gist/7f22e44ace49b5124eec
+@mixin interpolate(
+	$properties,
+	$min-value: $lower-limit-font, $max-value: $upper-limit-font,
+	$min-vw: $lower-limit-screen, $max-vw: $upper-limit-screen
+) {
+	// convert all units to rem
+	
+	
+	@each $property in $properties {
+		#{$property}: $min-value;
+	}
+	@media (min-width: $min-vw) {
+		@each $property in $properties {
+			#{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+		}
+	}
+	@media (min-width: $max-vw) {
+		@each $property in $properties {
+			#{$property}: $max-value;
+		}
+	}
+}
+
+// font contrast mixin option
+@mixin font-contrast(
+	$family: $base-font-family,
+	$weight: inherit,
+	$style: inherit
+) {
+	font-family: $family;
+	font-weight: $weight;
+	font-style: $style;
+}
+
+
+
+
+
+//	BUTTONS
+// ---------------------------------------------------------------------------
+// button base
+@mixin button-base($display: inline-block) {
+	display: $display;
+	font-family: $base-font-headers;
+	font-weight: $btn-font-weight;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	user-select: none;
+}
+
+// button size, ratio unit
+@mixin button-size($padding-y: 1, $padding-x: 3) {
+	padding: linear-scale($padding-y) linear-scale($padding-x);
+}
+
+// button size em unit
+@mixin button-size-em($padding-y: 1, $padding-x: 3) {
+	padding: linear-scale($padding-y) linear-scale($padding-x);
+}
+
+// button color
+@mixin button-color(
+	$color: $black,
+	$color-hover: $white,
+	$background: $white,
+	$background-hover: $black50,
+) {
+	// states
+	@include disabled {
+		color: color-contrast($background);
+		background-color: $background;
+	}
+
+	// base styles
+	color: $color;
+	background: $background;
+
+	// hover state
+	@include hover {
+		cursor: pointer;
+		color: $color-hover;
+		background: $background-hover;
+	}
+
+	// focus & active state
+	@include focus-active {
+		outline: $color-primary auto 2px;
+	}
+}
+
+// button outline
+@mixin button-outline(
+	$color: $black,
+	$color-hover: $grayDark,
+	$background-active: $color,
+	$border-active: lighten($color, 10%)
+) {
+	// disabled
+	@include disabled {
+		color: $black30;
+		background-color: transparent;
+	}
+
+	// base styles
+	color: $color;
+	background-color: transparent;
+	background-image: none;
+	border-color: $color;
+
+	// states
+	@include hover {
+		color: color-contrast($color);
+		background-color: $active-background;
+		border-color: $active-border;
+	}
+
+	// focus
+	@include focus {
+		box-shadow: 0 0 0 $btn-focus-width rgba($color, .5);
+	}
+}
+
+// button link
+@mixin button-link(
+	$font-weight: $btn-font-weight,
+	$link-color: $color-primary,
+	$link-color-hover: darken($color-primary, 7.5%),
+	$link-decoration-hover: underline
+) {
+	// disabled
+	@include disabled {
+		color: $btn-link-disabled-color;
+	}
+
+	// base styles
+	font-weight: $font-weight;
+	color: $link-color;
+	background-color: transparent;
+
+	// hover
+	@include hover {
+		color: $link-color-hover;
+		text-decoration: $link-decoration-hover;
+		background-color: $transparent;
+		border-color: $transparent;
+	}
+
+	// focus
+	@include focus {
+		text-decoration: $link-decoration-hover;
+		border-color: $transparent;
+		box-shadow: none;
+	}
+}
+
+
+
+
+
+//	FORMS
+// ---------------------------------------------------------------------------
+// form input
+@mixin form-input-base(
+	$display: block,
+	$border-radius: $form-input-border-radius,
+	$border-focus: $form-input-focus-border-color,
+	$input-color: $form-input-color,
+	$input-background: $form-input-background-color,
+	$input-border: $form-input-border,
+	$input-border-radius: $form-input-border-radius
+) {
+	// base
+	display: $display;
+	width: 100%;
+	font-size: inherit;
+	line-height: inherit;
+
+	// color
+	color: $input-color;
+	background-color: $input-background;
+	background-clip: padding-box;
+
+	// border
+	border: $input-border;
+	border-radius: $input-border-radius;
+
+	// IE10+ fix select caret style default
+	&::-ms-expand {
+		background-color: transparent;
+		border: 0;
+	}
+
+	// placeholder
+	&::-webkit-input-placeholder,
+	&::-moz-placeholder,
+	&:-ms-input-placeholder,
+	&:-moz-placeholder,
+	&::placeholder {
+		color: lighten($input-color, 7.5%);
+		opacity: 1;
+	}
+
+	// disabled & read-only
+	// edge case ignore: HTML5 says that controls under a fieldset > legend:first-child won't be disabled if the fieldset is disabled
+	&:disabled,
+	&[readonly] {
+		color: color-contrast($form-input-disabled-color);
+		background-color: $form-input-disabled-color;
+		opacity: 1;
+		&:hover { cursor: not-allowed !important; }
+	}
+
+}
+
+// form input focus
+@mixin form-input-focus(
+	$input-focus-color: $form-input-focus-color,
+	$input-focus-background: $form-input-focus-background,
+	$input-focus-border-color: $form-input-focus-border-color,
+	$input-box-shadow: $form-input-box-shadow,
+	$input-focus-box-shadow: ($form-input-box-shadow, $form-input-focus-box-shadow),
+) {
+	&:focus {
+		color: $input-focus-color;
+		background-color: $input-focus-background;
+		border-color: $input-focus-border-color;
+		outline: 0;
+		box-shadow: $input-box-shadow, $input-focus-box-shadow;
+	}
+}
+
+// form input plaintext
+@mixin form-input-plaintext() {
+	display: block;
+	width: 100%;
+	margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+	line-height: inherit;
+	background-color: $transparent;
+	border: solid $transparent;
+	border-width: $form-input-border-width, 0;
+}
+
+
+
+
+
+//	TABLES
+// ---------------------------------------------------------------------------
+
+
+
+
+
+//	IMAGES
+// ---------------------------------------------------------------------------
+// responsive images
+@mixin image-fluid {
+	max-width: 100%;
+	height: auto;
+}
+
+// retina images
+@mixin image-retina($file-1x, $file-2x, $width-1x, $height-1x) {
+	// non-retina
+	background-image: url($file-1x);
+	// retina
+	@media only screen and (min-resolution: 192dpi), // IE9-11
+		only screen and (min-resolution: 2dppx) { // HTML5
+		background-image: url($file-2x);
+		background-size: $width-1x $height-1x;
+	}
+}
+
+
+
+
+
+//	STATES: PLAIN, HOVER, FOCUS, ACTIVE
+// ---------------------------------------------------------------------------
+// hover
+@mixin hover {
+	&:hover, &.hover { @content; }
+}
+
+// focus
+@mixin focus {
+	&:focus, &.focus { @content; }
+}
+
+// active
+@mixin active {
+	&:active, &.active { @content; }
+}
+
+// disabled
+@mixin disabled {
+	&:disabled, &.disabled { @content; }
+}
+
+// hover and focus
+@mixin hover-focus {
+	&:hover, &.hover,
+	&:focus, &.focus {
+		@content;
+	}
+}
+
+// plain-faocus-active
+@mixin plain-hover-focus {
+	&,
+	&:hover, &.hover,
+	&:focus, &.focus {
+		@content;
+	}
+}
+
+// hover-focus-active
+@mixin hover-focus-active {
+	&:hover, &.hover,
+	&:focus, &.focus,
+	&:active, &.active {
+		@content;
+	}
+}
+
+// focus-active
+@mixin focus-active {
+	&:focus, &.focus,
+	&:active, &.active {
+		@content;
+	}
+}
+
+
+
+
+
+//	BORDERS
+// ---------------------------------------------------------------------------
+// handy border maker
+@mixin border(
+	$sides: true,
+	$border-width: $border-width-default,
+	$border-style: $border-style-default,
+	$border-color: $border-color-default,
+) {
+	// multiple sides (list)
+	@if is-list($sides) {
+		@each $side in $sides {
+			border-#{$side}: $border-width $border-style $border-color;
+		}
+	// single side (string)
+	} @else if is-string($sides) {
+		border-#{$sides}: $border-width $border-style $border-color;
+	// all sides (bool: true)
+	} @else if ($sides == true) or ($sides == "all") {
+		border: $border-width $border-style $border-color;
+	// no sides (bool: false)
+	} @else {
+		border: none;
+	}
+}
+
+@mixin border-radius($radius: $border-radius-default) {
+	border-radius: $radius;
+}
+
+@mixin border-top-radius($radius: $border-radius-default) {
+	border-top-left-radius: $radius;
+	border-top-right-radius: $radius;
+}
+
+@mixin border-right-radius($radius: $border-radius-default) {
+	border-top-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+}
+
+@mixin border-bottom-radius($radius: $border-radius-default) {
+	border-bottom-right-radius: $radius;
+	border-bottom-left-radius: $radius;
+}
+
+@mixin border-left-radius($radius: $border-radius-default) {
+	border-top-left-radius: $radius;
+	border-bottom-left-radius: $radius;
+}
+
+
+
+
+
+//	RESPONSIVE MEDIA
+// ---------------------------------------------------------------------------
+// respond-to
+@mixin respond-to($breakpoint, $media: all) {
+	@media only #{$media} and (min-width: $breakpoint) {
+		@content;
+	}
+}
+
+
+
+
+
+//	RETINA DISPLAYS
+// ---------------------------------------------------------------------------
+// high-dpi for high pixel density screens like retina displays
+@mixin high-dpi($media: all) {
+	@media only #{$media} and (min--moz-device-pixel-ratio: 1.5),
+		only #{$media} and (-o-min-device-pixel-ratio: 3/2),
+		only #{$media} and (-webkit-min-device-pixel-ratio: 1.5),
+		only #{$media} and (min-device-pixel-ratio: 1.5),
+		only #{$media} and (min-resolution: 144dpi),
+		only #{$media} and (min-resolution: 1.5dppx){
+			@content;
+	}
+}
+
+
+
+
+
+//	ANIMATION
+// ---------------------------------------------------------------------------
+// transitions
+@mixin transition(
+	$time: 0.25s,
+	$type: ease
+) {
+	transition: all $time $type;
+}
+
+
+
+

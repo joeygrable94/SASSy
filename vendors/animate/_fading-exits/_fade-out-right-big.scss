@@ -1,0 +1,20 @@
+@include keyframes(fade-out-right-big) {
+  0% {
+    opacity: 1;
+    @include transform(translateX(0));
+  }
+  100% {
+    opacity: 0;
+    @include transform(translateX(2000px));
+  }
+}
+
+@mixin fade-out-right-big($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+  @include animation-name(fade-out-right-big);
+  @include count($count);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
+}

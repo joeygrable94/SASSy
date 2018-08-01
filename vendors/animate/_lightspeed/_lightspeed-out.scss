@@ -1,0 +1,21 @@
+@include keyframes(lightspeed-out) {
+  0% {
+    opacity: 1;
+    @include transform(translateX(0%) skewX(0deg));
+  }
+  100% {
+    opacity: 0;
+    @include transform(translateX(100%) skewX(-30deg));
+  }
+}
+
+@mixin lightspeed-out($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+  @include animation-name(lightspeed-out);
+  @include count($count);
+  @include function(ease-in);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
+}

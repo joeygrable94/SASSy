@@ -1,0 +1,235 @@
+
+// ============================================================
+//
+//	BUTTONS BASE & COLORS
+//
+// ============================================================
+button, .button, input.btn {
+	
+	width: auto;
+	@include button-base(inline-block);
+	@include button-size($padding-y: 1, $padding-x: 2);
+	@include border-radius($btn-border-radius);
+	@include button-color();
+	text-decoration: none !important;
+
+	&.btn-default {
+		@include button-color(
+			$color:			$btn-default-color,
+			$background:	$btn-default-background,
+				$color-hover:		$btn-default-color-hover,
+				$background-hover:	$btn-default-background-hover,
+		);
+		@include border($border-color: $btn-default-border-color);
+	}
+
+	&.btn-primary {
+		@include button-color(
+			$color:			$btn-primary-color,
+			$background:	$btn-primary-background,
+				$color-hover:		$btn-primary-color-hover,
+				$background-hover:	$btn-primary-background-hover,
+		);
+		@include border($border-color: $btn-primary-border-color);
+	}
+
+	&.btn-secondary {
+		@include button-color(
+			$color:			$btn-secondary-color,
+			$background:	$btn-secondary-background,
+				$color-hover:		$btn-secondary-color-hover,
+				$background-hover:	$btn-secondary-background-hover,
+		);
+		@include border($border-color: $btn-secondary-border-color);
+	}
+
+	&.btn-tertiary {
+		@include button-color(
+			$color:			$btn-tertiary-color,
+			$background:	$btn-tertiary-background,
+				$color-hover:		$btn-tertiary-color-hover,
+				$background-hover:	$btn-tertiary-background-hover,
+		);
+		@include border($border-color: $btn-tertiary-border-color);
+	}
+
+	&.btn-success {
+		@include button-color(
+			$color:			$btn-success-color,
+			$background:	$btn-success-background,
+				$color-hover:		$btn-success-color-hover,
+				$background-hover:	$btn-success-background-hover,
+		);
+		@include border($border-color: $btn-success-border-color);
+	}
+
+	&.btn-info {
+		@include button-color(
+			$color:			$btn-info-color,
+			$background:	$btn-info-background,
+				$color-hover:		$btn-info-color-hover,
+				$background-hover:	$btn-info-background-hover,
+		);
+		@include border($border-color: $btn-info-border-color);
+	}
+
+	&.btn-warning {
+		@include button-color(
+			$color:			$btn-warning-color,
+			$background:	$btn-warning-background,
+				$color-hover:		$btn-warning-color-hover,
+				$background-hover:	$btn-warning-background-hover,
+		);
+		@include border($border-color: $btn-warning-border-color);
+	}
+
+	&.btn-error {
+		@include button-color(
+			$color:			$btn-error-color,
+			$background:	$btn-error-background,
+				$color-hover:		$btn-error-color-hover,
+				$background-hover:	$btn-error-background-hover,
+		);
+		@include border($border-color: $btn-error-border-color);
+	}
+
+}
+
+
+
+
+
+// ============================================================
+//
+//	BUTTON GROUPS
+//
+// ============================================================
+// horizntal
+.btn-group {
+	
+	display: inline-flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: stretch;
+	align-items: baseline;
+	margin-bottom: $vertical-measure;
+	vertical-align: middle;
+
+	// make buttons touching
+	& > button,
+	& > .btn {
+		position: relative;
+		flex: 0 1 auto;
+	}
+
+	// fix button border visibility on hover, focus, and active
+	@include hover { z-index: 1; }
+	@include focus-active { z-index: 1; }
+
+	// Prevent double borders when buttons are next to each other
+	button + button,
+	button + .btn-group,
+	.btn-group + button,
+	.btn-group + .btn-group {
+		margin-left: -$btn-border-width;
+		margin-right: -$btn-border-width;
+	}
+
+	// adjust first child spaceing, fix to left edge (0)	
+	& > button:first-child,
+	& > .btn:first-child {
+		margin-left: 0;
+	}
+	& > button:last-child,
+	& > .btn:last-child {
+		margin-right: 0;
+	}
+
+	// reset rounded corners
+	& > button:not(:last-child),
+	& > .btn:not(:last-child),
+	& > .btn-group:not(:last-child) > button,
+	& > .btn-group:not(:last-child) > .btn {
+		@include border-right-radius(0);
+	}
+
+	// reset rounded corners
+	& > button:not(:first-child),
+	& > .btn:not(:first-child),
+	& > .btn-group:not(:first-child) > button,
+	& > .btn-group:not(:first-child) > .btn {
+		@include border-left-radius(0);
+	}
+}
+
+// vertical
+.btn-group-vertical {
+
+	// flex column
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-start;
+
+	// spacing
+	margin-bottom: $vertical-measure;
+	vertical-align: middle;
+
+	// prevent double border when stacked on top of eachother
+	button + button,
+	button + .btn-group,
+	.btn-group + button,
+	.btn-group + .btn-group {
+		margin-top: -$btn-border-width;
+		margin-left: 0;
+	}
+
+	// fit width
+	& button,
+	& .btn,
+	& .btn-group {
+		width: 100%;
+	}
+
+	// reset rounded corners
+	& > button:not(:last-child),
+	& > .btn:not(:last-child),
+	& > .btn-group:not(:last-child) > button,
+	& > .btn-group:not(:last-child) > .btn {
+		@include border-bottom-radius(0);
+	}
+
+	// reset rounded corners
+	& > button:not(:first-child),
+	& > .btn:not(:first-child),
+	& > .btn-group:not(:first-child) > button,
+	& > .btn-group:not(:first-child) > .btn {
+		@include border-top-radius(0);
+	}
+}
+
+
+
+
+
+// ============================================================
+//
+//	BUTTON BLOCKS
+//
+// ============================================================
+.btn-block {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+	& > .btn,
+	& > button,
+	& > .btn-group {
+		flex: 1 0 auto;
+		align-self: stretch;
+	}
+}

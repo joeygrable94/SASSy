@@ -1,0 +1,288 @@
+// SASSY TYPOGRAPHY
+// 
+// -------------------------
+
+html {
+	// full screen responsive enabled
+	@if $full-screen-responsive {
+		height: 100vh;
+		width: 100vw;
+	}
+	font-size: $font-root;
+}
+
+body {
+	// full screen responsive enabled
+	@if $full-screen-responsive {
+		min-height: 100%;
+		min-width: 100%;
+	}
+	@include interpolate(font-size);
+	@include interpolate(
+		line-height,
+		linear-scale(2), linear-scale(3),
+		rem($lower-limit-screen), rem($upper-limit-screen)
+	);
+	font-family: $base-font-family;
+	font-weight: 400;
+	color: $black;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+p, blockquote,
+pre, code,
+ol, ul, dl
+{
+	margin: 0;
+	padding: 0;
+	padding: 0;
+}
+
+
+
+
+
+// HEADERS SETTINGS
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	font-family: $base-font-headers;
+	font-weight: bold;
+	text-rendering: optimizelegibility;
+}
+
+h1,h3,h5 { color: $color-primary; }
+h2,h4,h6 { color: $color-secondary; }
+
+h1, .h1 {
+	@include font-contrast(
+		$family: 'akzg-super',
+		$style: normal,
+		$weight: bolder
+	);
+	line-height: linear-scale(5);
+	padding-top: $vertical-measure;
+	padding-bottom: $vertical-measure;
+}
+
+h2, .h2 {
+	@include font-contrast(
+		$family: 'akzg-light-italic',
+		$style: italic,
+		$weight: light
+	);
+	line-height: linear-scale(4);
+	padding-top: linear-scale(2);
+	padding-bottom: $vertical-measure;
+}
+
+h3, .h3 {
+	@include font-contrast(
+		$family: 'akzg-bold',
+		$style: normal,
+		$weight: bold
+	);
+	line-height: linear-scale(3);
+	padding-top: linear-scale(2);
+}
+
+h4, .h4 {
+	@include font-contrast(
+		$family: 'akzg-light-italic',
+		$style: italic,
+		$weight: bold
+	);
+	line-height: linear-scale(2);
+	padding-top: linear-scale(1);
+	padding-bottom: $vertical-measure;
+}
+
+h5, .h5 {
+	@include font-contrast(
+		$family: 'akzg-super',
+		$style: normal,
+		$weight: bolder
+	);
+	line-height: linear-scale(2);
+	padding-top: linear-scale(2, down);
+}
+
+h6, .h6 {
+	@include font-contrast(
+		$family: 'akzg-light-italic',
+		$style: italic,
+		$weight: light
+	);
+	line-height: linear-scale(1);
+	padding-top: linear-scale(2, down);
+	border-bottom: 1.5px solid $color-secondary;
+}
+
+
+
+
+
+// PARAGRAPH SETTINGS
+p {
+	@if $paragraph-justify {
+		text-align: justify;
+	}
+}
+@if $paragraph-indent {
+	p + p {
+		text-indent: linear-scale(1);
+		@include interpolate(
+			(text-indent),
+			linear-scale(1), linear-scale(3),
+			rem($lower-limit-screen), rem($upper-limit-screen)
+		);
+	}
+}
+
+
+
+
+
+// LINKS
+a {
+	color: $color-secondary;
+	text-decoration: none;
+}
+
+
+
+
+
+// LISTS
+ol, ul, dl {
+	padding-left: $vertical-measure;
+	margin-left: $vertical-measure;
+	margin-bottom: $vertical-measure;
+}
+ul ul,
+ol ol,
+dl dl { margin-left: 0; }
+ul { list-style: disc; }
+ol { list-style: decimal; }
+dt { text-decoration: underline; }
+dt:after { content: ': '; }
+dd { margin-left: $vertical-measure; }
+
+
+
+
+// BLOCKQUOTES
+blockquote {
+	margin-top: $vertical-measure;
+	margin-bottom: $vertical-measure;
+	padding-left: $vertical-measure;
+	border-left: $vertical-measure solid lighten($black, 50%);
+	font-family: $base-font-family;
+	p { margin-bottom: $vertical-measure }
+	footer {
+		cite {
+			&:before { content: " – "; }
+		}
+	}
+}
+
+
+
+
+
+// CODE
+pre, code {
+	font-family: $base-font-mono;
+	border: 1px solid #cacaca;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 2px 5px;
+	display: inline;
+}
+pre {
+	display: block;
+	padding: $vertical-measure;
+	margin-bottom: $vertical-measure;
+	background-color: $black;
+	color: $white;
+}
+
+
+
+
+
+// TIME
+time, .time {
+	//text-transform: uppercase;
+}
+
+
+
+
+
+// ADDRESS
+address {
+	margin-bottom: $vertical-measure;
+}
+
+
+
+
+
+// PROPERTY STYLES
+small, .font-small {
+	font-size: 0.75rem;
+}
+em {
+	font-style: italic;
+	//color: $color-secondary;
+}
+strong { font-weight: bold; }
+i {
+	font-style: italic;
+	&.light { font-weight: lighter; }
+	&.normal { font-weight: normal; }
+	&.bold { font-weight: bolder; }
+}
+b { font-style: bold; }
+
+
+
+
+
+// FONT STYLING
+.font-base { font-family: $base-font-family !important; }
+.font-contrast { font-family: $base-font-headers !important; }
+
+
+
+
+
+// SPECIAL CASES
+// [1] https://developer.mozilla.org/en-US/docs/CSS/font-variant
+abbr {
+	font-variant: small-caps; // [1]
+	font-weight: 600;
+	text-transform: lowercase;
+}
+// Cursor changed to a question mark when it has a title
+abbr[title]:hover { cursor: help; }
+
+// Creates horizontal rules that obey the baseline.
+// [1] Zero outs the user agent border
+hr {
+	margin-top: $vertical-measure;
+	margin-bottom: $vertical-measure;
+	border: none; // [1]
+	border-top-color: $black;
+	border-top-style: solid;
+	border-top-width: 2px;
+}

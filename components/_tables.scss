@@ -1,0 +1,52 @@
+// tables
+table {
+	width: 100%;
+	margin-top: linear-scale(2);
+	margin-bottom: linear-scale(2);
+}
+
+// groups
+thead {
+	font-weight: bolder;
+	@include font-contrast(
+		$family: 'akzg-bold',
+		$style: normal,
+		$weight: bold
+	);
+	border-bottom: linear-scale(2, down) solid $color-secondary;
+	color: $color-primary;
+}
+
+tbody {
+	// body rows
+	tr {
+		// border rows
+		@if $table-row-bordered {
+			@include border($sides: bottom);
+		}
+		// stripe rows
+		@if $table-row-striped {
+			&:nth-child(even) {
+				background-color: $black20;
+			}
+		}
+	}
+}
+
+tfoot {}
+
+
+// headers & cells
+th, td {
+	//@include padding($mltp: $baseline-unit, $sides: $list-tb);
+	padding: linear-scale(2, down);
+	text-align: left;
+	&:first-child {
+		//@include padding-em($mltp: ($baseline-mltp / 2), $sides: left);
+		padding-left: $vertical-measure;
+	}
+	&:last-child {
+		//@include padding-em($mltp: ($baseline-mltp / 2), $sides: right);
+		padding-right: $vertical-measure;
+	}
+}

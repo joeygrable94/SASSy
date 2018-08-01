@@ -1,0 +1,23 @@
+@include keyframes(bounce-out-up) {
+  0% {
+	  @include transform(translateY(0));
+	 }
+  20% {
+    opacity: 1;
+    @include transform(translateY(20px));
+  }
+	100% {
+  	opacity: 0;
+  	@include transform(translateY(-2000px));
+  }
+}
+
+@mixin bounce-out-up($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+	@include animation-name(bounce-out-up);
+	@include count($count);
+	@include duration($duration);
+	@include delay($delay);
+	@include function($function);
+	@include fill-mode($fill);
+	@include visibility($visibility);
+}

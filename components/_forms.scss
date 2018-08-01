@@ -1,0 +1,122 @@
+
+// forms
+form {
+	display: block;
+	margin: 0 auto;
+	@include border-box();
+}
+
+fieldset,
+.form-group {
+	margin-bottom: $vertical-measure;
+}
+
+// form inline
+.form-inline {
+	display: flex;
+	flex-wrap: wrap;
+	> .span,
+	> [class*="span-"] {
+		padding-right: $vertical-measure;
+		padding-left: $vertical-measure;
+	}
+}
+
+// inputs, select, textareas
+input, select, textarea {
+	@include border-box();
+	@include form-input-base();
+	@include hover { cursor: pointer; }
+	@include form-input-focus();
+
+	&:not(.btn) {
+		//padding: $vertical-measure;
+	}
+}
+
+// input
+input {
+	&[type=text] {}
+	&[type=password] {}
+	&[type=email] {}
+	&[type=submit] {}
+	
+	// files: make file inputs take up a whole line
+	&[type=file] {
+		display: block;
+		width: 95%;
+	}
+	
+	// checkbox & radio
+	&[type=checkbox],
+	&[type=radio] {
+		-webkit-appearance: none !important;
+				appearance: none !important;
+		display: inline-block;
+		position: relative;
+		width: linear-scale(2) !important;
+		height: linear-scale(2) !important;
+		margin-left: $vertical-measure;
+		margin-right: $vertical-measure;
+		@include border();
+		@include border-radius($form-input-border-radius);
+		background-color: $transparent;
+		
+		// active states
+		&:active,
+		&:checked:active { position: relative; }
+		// checked
+		&:checked { position: relative; }
+		// check mark
+		&:checked:after {
+			content: '\2713';
+			font-size: 115%;
+			position: absolute;
+			top: linear-scale(3, down) * -1;
+			left: linear-scale(4, down);
+		}
+	}
+
+	// radio
+	&[type=radio] {
+		@include border($border-width: ($border-width-default + 0.5));
+		@include border-radius($vertical-measure / $modular-scale-ratio);
+	}
+
+	// transparent background
+	&.transparent {
+		-webkit-box-shadow: inset 0 0 8px  $transparent, 0 0 16px $transparent;
+		   -moz-box-shadow: inset 0 0 8px  $transparent, 0 0 16px $transparent;
+				box-shadow: inset 0 0 8px  $transparent, 0 0 16px $transparent;
+		background-color: $transparent;
+	}
+}
+
+// select fixes
+select {
+	// make select the same height as the ratio:rhythm line-height
+	&:not([size]),
+	&:not([multiple]) {
+		//height: $vertical-measure;
+		border-radius: $form-input-border-radius;
+	}
+	// IE dropdown fix
+	&:focus::-ms-value {
+		color: $form-input-color;
+		background-color: $form-input-background-color;
+	}
+}
+
+// textarea
+textarea {
+	letter-spacing: 0.3px;
+	white-space: pre-line;
+	resize: none;
+}
+
+// labels
+label {
+	line-height: inherit;
+	font-size: inherit;
+	font-weight: $form-label-font-weight;
+}
