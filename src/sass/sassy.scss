@@ -1,0 +1,27 @@
+// SASSY IMPORTS
+// -------------------------
+@charset "UTF-8";						//  CHARSET
+
+//@import "vendors/animate/animate";	// animate variables
+@import "vendors/colors/colors";		// color variables
+@import "vendors/color-blend-modes";	// color blending modes
+
+@import "modules/variables";			// global variables
+@import "modules/mixins";				// global mixins
+@import "modules/functions";			// global functions
+@import "modules/grid";					// grid system functions and mixins
+
+// reset styles
+@import "../../bower_components/HTML5-reset/assets/css/reset.css";
+
+@import "modules/font-face";			// mixin to include fonts => git@TMMC
+@import "modules/font-imports";			// import custom fonts
+
+@import "components/typography";		// establish typographic system
+@import "components/extends";			// SASS extends
+@import "components/forms";             // form styles
+@import "components/tables";            // tables styles
+@import "components/buttons";           // button styles
+
+// EDIT CUSTOM STYLES IN THE GLOBAL MODULE
+@import "modules/global";				// global styles

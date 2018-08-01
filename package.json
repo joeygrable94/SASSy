@@ -1,0 +1,28 @@
+{
+  "name": "sassy",
+  "version": "1.0.0",
+  "description": "A prototyping framework that produces production ready code.",
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeygrable94/SASSy.git"
+  },
+  "author": "Joey Grable",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joeygrable94/SASSy/issues"
+  },
+  "homepage": "https://github.com/joeygrable94/SASSy#readme",
+  "devDependencies": {
+    "grunt": "^1.0.3",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "load-grunt-tasks": "^4.0.0"
+  },
+  "dependencies": {
+    "bower": "^1.8.4"
+  }
+}
