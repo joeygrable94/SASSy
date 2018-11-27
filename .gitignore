@@ -1,5 +1,6 @@
 .sass-cache/
-*.css.map
-*.sass.map
 node_modules/
 bower_components/
+
+*.css.map
+*.sass.map
