@@ -1,0 +1,82 @@
+// ===========================================================================
+// WOOCOMMERCE STYLES
+// ===========================================================================
+
+body.woocommerce-page {
+
+	// BUTTONS
+	& .button,
+	& a.button,
+	& a.button.alt,
+	& button.button.alt,
+	& input.button.alt {}
+	
+	& .button,
+	& a.button {}
+
+	& a.button.alt,
+	& button.button.alt,
+	& input.button.alt {}
+
+	& .button.add_to_cart_button,
+	& button.single_add_to_cart_button {}
+
+	& .content-page-main-meta {}
+
+	& .page-main-woocommerce {
+
+		// general page styles
+		& > *:not(.page-title) {}
+		& .page-title {}
+
+		// special cases
+		& .term-description {}
+		& .woocommerce-notices-wrapper {}
+
+		// products top bar
+		& .woocommerce-result-count {}
+		& .woocommerce-ordering {}
+
+		// products list
+		& ul.products {
+			& li.product {}
+		}
+		// 100% Product Width on Mobile
+		@media screen and (max-width: $lower-limit-screen) {
+			ul.products[class*=columns-] li.product,
+			ul.products[class*=columns-] li.product {
+				width: 100%;
+				float: none;
+				clear: none;
+			}
+		}
+
+		// product info
+		& .woocommerce-product-details__short-description ul {}
+		& .woocommerce-loop-product__title,
+		& .price {}
+		& .price {}
+		& ul.products li.product a img.attachment-woocommerce_thumbnail {}
+	}
+
+	// PRODUCT PAGE
+	& .product {
+
+		& .woocommerce-product-gallery {}
+		& .entry-summary {}
+		& .woocommerce-tabs {
+			& .woocommerce-Tabs-panel {}
+		}
+		& .related.products {}
+		& .product_meta {
+			& span.sku_wrapper,
+			& span.posted_in,
+			& span.tagged_as {}
+			& span a {}
+		}
+		& .stock {}
+		& form.cart {}
+	}
+
+
+}

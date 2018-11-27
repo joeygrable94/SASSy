@@ -1,0 +1,26 @@
+@include keyframes(flip-in-y) {
+  0% {
+    opacity: 0;
+    @include transform(perspective(400px) rotateY(90deg));
+  }
+  40% {
+    @include transform(perspective(400px) rotateY(-10deg));
+  }
+  70% {
+    @include transform(perspective(400px) rotateY(10deg));
+  }
+  100% {
+    opacity: 1;
+    @include transform(perspective(400px) rotateY(0deg));
+  }
+}
+
+@mixin flip-in-y($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+  @include animation-name(flip-in-y);
+  @include count($count);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
+}

@@ -1,0 +1,375 @@
+// ===========================================================================
+// SHORTCODE STYLES
+// ===========================================================================
+
+// SIZING & SPACING
+// --------------------------------------------------
+.wpsc {
+
+	// HEIGHT & WIDTH
+	$units: (
+		width: 1%,
+		height: 1vh
+	);
+	$dimensions: '100','90','85','80','75','70','66','60','50','40','33','30','25','20','15','10','5';
+	// two dimensional loop through units and dimensions
+	@each $name, $unit in $units {
+		@each $dimension in $dimensions {
+			&.#{$name}-#{$dimension} {
+				#{$name}: number($dimension) * $unit  !important;
+			}
+		}
+	}
+
+	// MARGIN & PADDING
+	$types: 'margin', 'padding';
+	$sides: 'top', 'right', 'bottom', 'left';
+	$sizes: (
+		none: 0rem,
+		sm: 2rem,
+		md: 4rem,
+		lg: 6rem,
+		xl: 8rem,
+		xxl: 10rem,
+	);
+	// three dimensional loop through types, sides, and sizes
+	@each $type in $types {
+		@each $side in $sides {
+			@each $size, $value in $sizes {
+				&.#{$type}-#{$side}-#{$size} {
+					#{$type}-#{$side}: $value  !important;
+				}
+			}
+		}
+	}
+
+	// POSITIONING
+	&.text-center { text-align: center !important; }
+	&.center {
+		margin-right: auto !important;
+		margin-left: auto !important;
+	}
+	&.push-left, &.pull-left, {
+		margin-right: auto !important;
+		margin-left: 0 !important;
+	}
+	&.push-right, &.pull-right {
+		margin-right: 0 !important;
+		margin-left: auto !important;
+	}
+
+	// CONTAINERS
+	&.skinny { max-width: $lower-limit-screen !important; }
+	&.narrow { max-width: $middle-limit-screen !important; }
+	&.contain { max-width: $upper-limit-screen !important; }
+	&.extrude { max-width: $lower-limit-desktop !important; }
+	&.full, &.full-width {
+		max-width: 100% !important;
+		padding-left: 0rem !important;
+		padding-right: 0rem !important;
+	}
+
+	// IMAGES
+	& img.full {
+		max-width: 100% !important;
+		width: 100% !important;
+		max-height: 100% !important;
+		height: 100% !important;
+	}
+}
+
+
+
+
+
+// IMAGE_BLOCK
+// --------------------------------------------------
+.image-block {
+	display: block;
+	position: relative;
+	margin: 0 auto !important;
+	margin-top: linear-scale(4) !important;
+	margin-bottom: linear-scale(4) !important;
+	// default
+	& .inner {
+		@include clearfix();
+		// image content
+		& img {
+			padding: $vertical-measure;
+			@include transition($time: 0.15s, $type: ease-in);
+			object-fit: contain;
+			&:hover {
+				box-shadow: 0px 0px linear-scale(1) 0px lighten($color-shadow, 10%);
+				@include transition($time: 0.15s, $type: ease-out);
+			}
+		}
+		// header text
+		& h1, & h2, & h3, & h4, & h5, & h6 {
+			padding-top: linear-scale(1);
+		}
+		// all text content
+		& h1, & h2, & h3, & h4, & h5, & h6, & p {}
+		& p + p { margin-top: $vertical-measure; }
+		& p:last-child { margin-bottom: $vertical-measure; @include clearfix(); }
+		// responsive
+		@media screen and (min-width: $middle-limit-screen) {
+			& img {
+				width: 50%;
+				float: left;
+			}
+			& img + p { border-top: linear-scale(2, down) solid $color-primary; }
+			& h1, & h2, & h3, & h4, & h5, & h6 {
+				padding-top: linear-scale(2);
+			}
+			& h1, & h2, & h3, & h4, & h5, & h6, & p {
+				width: 50%;
+				float: right;
+				padding-left: linear-scale(2);
+				padding-right: linear-scale(2);
+			}
+		}
+		// [scroller] nested schortcode
+		& .scroller {
+			margin: 0;
+			border: 1px solid $color-highlight;
+			// responsive
+			@media screen and (min-width: $middle-limit-screen) {
+				width: 50%;
+				float: left;
+				& h1, & h2, & h3, & h4, & h5, & h6, & p {
+					width: 50%;
+					float: right;
+				}
+				& + h1, & + h2, & + h3, & + h4, & + h5, & + h6, & + p {
+					padding-top: linear-scale(2);
+					border-top: linear-scale(1) solid $color-primary;
+				}
+			}
+		}
+		// [fullscreen] nested shortcode
+		& .btn-fullscreen-wrap {
+			padding-top: linear-scale(1);
+			@media screen and (min-width: $middle-limit-screen) {
+				width: 50%;
+				float: left;
+				padding-top: linear-scale(2);
+			}
+		}
+	}
+}
+
+
+
+
+
+// SCROLLER
+// --------------------------------------------------
+.scroller {
+	display: block;
+	position: relative;
+	height: ((100vh * 9 ) / 16);
+	overflow-x: scroll;
+	overflow-y: hidden;
+	margin: linear-scale(4) auto;
+	@extend .scrollbar-default;
+
+	& .deck {
+		min-width: 100%;
+		height: 100%;
+		display: flex;
+		flex-flow: row nowrap;
+		& img {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			bottom: 0;
+			padding: $vertical-measure;
+			object-fit: contain;
+			&:hover { cursor: scroll; }
+		}
+	}
+}
+
+
+
+
+
+// COLUMN_WRAP & COLUMN
+// --------------------------------------------------
+.sc-column-wrap {
+	display: flex;
+	flex-flow: row wrap;
+	margin-top: 0rem !important;
+	margin-bottom: 0rem !important;
+	padding-right: linear-scale(2);
+	padding-left: linear-scale(2);
+	// column
+	& .sc-column {
+		padding-left: 0rem;
+		padding-right: 0rem;
+		// special classes
+		&.full {
+			width: 100% !important;
+			padding: 0rem !important;
+			// next sibiling, fix left edge
+			& + * { padding-left: 0rem !important; }
+		}
+	}
+	// column widths
+	@for $i from 1 through $grid-max-columns {
+		&.count-#{$i} {
+			& .sc-column { width: 100%;
+				// span widths
+				&.span-#{$i} { width: 100%; }
+			}
+		}
+	}
+	// responsive
+	@media screen and (min-width: $middle-limit-screen) {
+		// column
+		& .sc-column {
+			padding-left: $vertical-measure;
+			padding-right: $vertical-measure;
+			&.default:first-of-type { padding-left: 0rem; }
+			&.default:last-of-type { padding-right: 0rem; }
+		}
+		// column widths
+		@for $col from 1 through $grid-max-columns {
+			&.count-#{$col} {
+				& .sc-column { width: 100%;
+					// span widths
+					@for $sp from 1 through $col {
+						&.span-#{$sp} { width: floor(100% / $col) * $sp; }
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+// VIEWPORT WINDOW
+// --------------------------------------------------
+.viewport-window {
+	display: flex;
+	flex-flow: column wrap;
+	@include reset();
+	// types
+	& img {
+		@include reset();
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+
+
+
+
+// FULLSCREEN lightbox
+// --------------------------------------------------
+.btn-fullscreen-wrap {}
+.btn-fullscreen {
+	display: block;
+	position: relative;
+	width: 100%;
+	margin: auto;
+	text-decoration: none !important;
+	@include button-base(inline-block);
+	@include button-size(0.5, 1);
+	@include border-radius($btn-border-radius);
+	@include button-color();
+	@include button-color(
+		$color:			$btn-secondary-color,
+		$background:	$btn-secondary-background,
+			$color-hover:		$btn-secondary-color-hover,
+			$background-hover:	$btn-secondary-background-hover,
+	);
+	@include border($border-color: $btn-secondary-border-color);
+}
+#fullscreen-lightbox {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column-reverse;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	z-index: -10000;
+	opacity: 0;
+	@include transition($time: 0.25s, $type: ease-out);
+	&.active {
+		z-index: 10000;
+		opacity: 1;
+		@include transition($time: 0.25s, $type: ease-out);
+	}
+	& .inner-content,
+	& .inner-toggle {
+		position: relative;
+	}
+	& .inner-content {
+		max-width: 100%;
+		height: 100%;
+		background-color: $color-secondary;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
+		& img.view-content {
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
+			margin: auto;
+			object-fit: contain;
+			padding: linear-scale(2);
+		}
+	}
+	& .inner-toggle {
+		padding: linear-scale(1) linear-scale(2);
+		border-bottom: linear-scale(1) solid $color-secondary;
+		color: $white; background-color: $color-primary;
+		@include transition($time: 0.25s, $type: ease-out);
+		&:hover {
+			cursor: pointer;
+			color: $white; background-color: lighten($color-primary, 15%);
+			@include transition($time: 0.25s, $type: ease-out);
+		}
+		& i {
+			transform: rotate(45deg);
+		}
+	}
+}
+
+
+
+
+
+// Contact Form 7
+// --------------------------------------------------
+form {
+	& label { color: $color-primary; }
+	// WP <p> tag fix
+	& p + p { text-indent: 0rem !important; }
+	& .wpcf7-form-control {}
+	& .wpcf7-submit {
+		@include button-color(
+			$color:						$btn-primary-color,
+			$background:				$btn-primary-background,
+				$color-hover:			$btn-primary-color-hover,
+				$background-hover:		$btn-primary-background-hover,
+		);
+		@include border($border-color:	$btn-secondary-border-color);
+	}
+}
+
+
+

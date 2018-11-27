@@ -1,0 +1,130 @@
+// SASSY FUNCTIONS
+// 
+// -------------------------
+
+// calculates the columns width percentage given their context (grid-max-columns)
+@function columns($columns, $container-columns: $grid-max-columns) {
+	$width: $columns * $grid-column-width + ($columns - 1) * $grid-gutter-width;
+	$container-width: $container-columns * $grid-column-width + ($container-columns - 1) * $grid-gutter-width;
+	@return percentage($width / $container-width);
+}
+
+// calculates a gutter width percentage given their context (grid-max-columns)
+@function gutter($container-columns: $grid-max-columns, $gutter: $grid-gutter-width) {
+	$container-width: $container-columns * $grid-column-width + ($container-columns - 1) * $grid-gutter-width;
+	@return percentage($gutter / $container-width);
+}
+
+// calculates offset amounts for offset columns
+@function offset-columns($columns) {
+	$margin: $columns * $grid-column-width + $columns * $grid-gutter-width;
+	@return $margin;
+}
+
+// calculates target REMs given their context
+@function rem($target, $context: $em-root) {
+	@return ($target / $context) * 1rem;
+}
+
+// strips units from a given number
+@function strip-unit($number) {
+	@if type-of($number) == "number" and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+	@return $number;
+}
+
+// calculates a linear interval from a given number
+@function linear-scale($times: 1, $direction: "up", $number: $vertical-measure) {
+	@if type-of($number) == "number" and not unitless($number) {
+		$value: $number;	// initial value to return
+		@if $direction == "up" {	// scale up
+			$value: $value * $times;
+		}
+		@if $direction == "down" {	// scale down
+			$value: $value / $times;
+		}
+		@return $value;	// return scaled value
+	}
+}
+
+// converts a string to a number
+@function number($string) {
+	// matrices
+	$strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+	$numbers:  0   1   2   3   4   5   6   7   8   9;
+	// vars
+	$result: 0;
+	$minus: false;
+	$divider: 0;
+	// loop through all characters
+	@for $i from 1 through str-length($string) {
+		// get character
+		$character: str-slice($string, $i, $i);
+		$index: index($strings, $character);
+		// unknown char
+		@if not $index {
+			@warn "Unknown character `#{$character}`.";
+			@return false;
+		}
+		// is negative
+		@if $character == '-' {
+			$minus: true;
+		}
+		// is decimal
+		@else if $character == '.' {
+			$divider: 1;
+		}
+		// is number
+		@else {
+			// is number unit
+			@if not $index {
+				$result: if($minus, $result * -1, $result);
+				@return _length($result, str-slice($string, $i));
+			}
+			// get the number
+			$number: nth($numbers, $index);
+			
+			// Decimal dot hasn't been found yet
+			@if $divider == 0 {
+				$result: $result * 10;
+			}
+
+			// decimal found
+			@else {
+				// move decimal to the left
+				$divider: $divider * 10;
+				$number: $number / $divider;
+			}
+			// add this positions number value
+			$result: $result + $number;
+		}
+	}
+	// return if minus or integer
+	@return if($minus, $result * -1, $result);
+}
+
+// returns a length => a number value with apended units
+@function _length($number, $unit) {
+	$strings: 'px' 'cm' 'mm' '%' 'ch' 'pica' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw' 'vh' 'vmin' 'vmax';
+	$units:   1px  1cm  1mm  1%  1ch  1pica  1in  1em  1rem  1pt  1pc  1ex  1vw  1vh  1vmin  1vmax;
+	$index: index($strings, $unit);
+	@if not $index {
+		@warn "Unknown unit `#{$unit}`.";
+		@return false;
+	}
+	@return $number * nth($units, $index);
+}
+
+// color contrast
+@function color-contrast($color) {
+	$r: red($color);
+	$g: green($color);
+	$b: blue($color);
+	$yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+	@if ($yiq >= $color-contrasted-threshold) {
+		@return $color-contrast-text-dark;
+	} @else {
+		@return $color-contrast-text-light;
+	}
+}

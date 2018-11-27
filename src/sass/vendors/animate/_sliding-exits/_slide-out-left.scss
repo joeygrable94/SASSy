@@ -1,0 +1,19 @@
+@include keyframes(slide-out-left) {
+	0% {
+  	@include transform(translateX(0));
+  }
+	100% {
+  	opacity: 0;
+  	@include transform(translateX(-2000px));
+  }
+}
+
+@mixin slide-out-left($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+  @include animation-name(slide-out-left);
+  @include count($count);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
+}

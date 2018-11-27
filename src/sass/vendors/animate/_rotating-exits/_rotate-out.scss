@@ -1,0 +1,22 @@
+@include keyframes(rotate-out) {
+	0% {
+  	opacity: 1;
+  	@include transform(rotate(0));
+  	@include transform-origin(center center);
+  }
+	100% {
+  	opacity: 0;
+  	@include transform(rotate(200deg));
+  	@include transform-origin(center center);
+  }
+}
+
+@mixin rotate-out($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+  @include animation-name(rotate-out);
+  @include count($count);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
+}

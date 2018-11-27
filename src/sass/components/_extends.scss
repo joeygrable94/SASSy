@@ -1,0 +1,49 @@
+// EXTENDS
+// ==================================================
+
+// --------------------------------------------------
+// SCROLLBARS
+// --------------------------------------------------
+.scrollbar-default,
+.scrollbar-skinny {
+	&::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.15);
+		border: 1px solid rgba(0,0,0,0.15);
+		background-color: rgba(255,255,255,0.5);
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: $color-primary;
+	}
+}
+// DEFAULT
+.scrollbar-default {
+	&::-webkit-scrollbar {
+		width: linear-scale(1, down);
+		height: linear-scale(1, down);
+	}
+}
+// SKINNY
+.scrollbar-skinny {
+	&::-webkit-scrollbar {
+		width: linear-scale(2, down);
+		height: linear-scale(2, down);
+	}
+}
+
+
+
+
+
+// --------------------------------------------------
+// CONTENT BLOCKS 
+// --------------------------------------------------
+.cb-contain {
+	position: relative;
+	margin: auto;
+	width: 100%;
+	max-width: $upper-limit-screen;
+}
+
+
+
+

@@ -1,0 +1,45 @@
+@charset "UTF-8";						//  CHARSET
+
+// -------------------------
+// SASSY BUILD
+// -------------------------
+//@import "vendors/animate/animate";	// animate variables
+@import "vendors/colors/colors";		// color variables
+@import "vendors/color-blend-modes";	// color blending modes
+// -------------------------
+@import "modules/variables";			// global variables
+@import "modules/mixins";				// global mixins
+@import "modules/functions";			// global functions
+@import "modules/grid";					// grid system functions and mixins
+@import "modules/font-face";			// mixin to include fonts => git@TMMC
+// -------------------------
+// SASSY BASE STYLES
+// -------------------------
+@import "vendors/reset-custom";			// reset styles
+@import "vendors/normalize.min";		// normalize styles
+@import "components/extends";			// SASS extensions
+// -------------------------
+@import "components/font-imports";		// import custom fonts
+@import "components/typography";		// establish typographic system
+@import "components/images";			// image styles
+@import "components/forms";             // form styles
+@import "components/tables";            // tables styles
+@import "components/buttons";           // button styles
+@import "components/custom-animation";  // animation styles
+// -------------------------
+// CUSTOM WORDPRESS THEME STYLES
+// -------------------------
+@import "custom/shortcodes";			// WP shortcode styles
+@import "custom/doc-root";				// document root styles (body)
+@import "custom/navigation";			// navigation styles
+@import "custom/headers";				// header styles
+@import "custom/footers";				// footer styles
+@import "custom/pages-and-posts";		// page & post container styles
+@import "custom/page-and-post-content";	// specific page & post styles
+@import "custom/post-types";			// specific post type styles
+@import "custom/comments";				// comment styles
+@import "custom/woocommerce";			// WooCommerce styles
+@import "custom/widgets";				// widget styles
+@import "custom/colour-overrides";		// color case scenarios (overrides)
+@import "custom/appendable-classes";	// appendable classes (for prototyping or overrides)
+// -------------------------

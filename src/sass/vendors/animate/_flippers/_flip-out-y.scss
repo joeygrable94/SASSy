@@ -1,0 +1,20 @@
+@include keyframes(flip-out-y) {
+  0% {
+    opacity: 1;
+    @include transform(perspective(400px) rotateY(0deg));
+  }
+  100% {
+    opacity: 0;
+    @include transform(perspective(400px) rotateY(90deg));
+  }
+}
+
+@mixin flip-out-y($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+  @include animation-name(flip-out-y);
+  @include count($count);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
+}

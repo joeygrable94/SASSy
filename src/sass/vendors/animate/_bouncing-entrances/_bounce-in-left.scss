@@ -1,0 +1,26 @@
+@include keyframes(bounce-in-left) {
+  0% {
+    opacity: 0;
+    @include transform(translateX(-2000px));
+  }
+  60% {
+    opacity: 1;
+    @include transform(translateX(30px));
+  }
+  80% {
+    @include transform(translateX(-10px));
+  }
+  100% {
+    @include transform(translateX(0));
+  }
+}
+
+@mixin bounce-in-left($count: $count-default, $duration: $duration-default, $delay: $delay-default, $function: $function-default, $fill: $fill-default, $visibility: $visibility-default) {
+  @include animation-name(bounce-in-left);
+  @include count($count);
+  @include duration($duration);
+  @include delay($delay);
+  @include function($function);
+  @include fill-mode($fill);
+  @include visibility($visibility);
+}

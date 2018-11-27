@@ -1,0 +1,53 @@
+// SASSY GRID
+// credit => http://thoughtbot.com/bourbon/#flex-grid
+// -------------------------
+
+// row mixin includes clearfix hack, last-child margin fix and any global row styles
+@mixin row {
+	width: 100%;
+	max-width: $grid-max-width;
+	margin: 0 auto;
+	@include clearfix;
+	@include nesting;
+}
+
+// target nested elements with grid styles
+// use in global styles as well as row mixin
+@mixin nesting {
+	// remove padding from parent container so floated columns can fill it
+	padding: 0;
+	// target only child elements of the container
+	// add elements other than div as needed
+	& > div {
+		float: left;
+		margin-right: gutter();
+		@include border-box;
+	}
+}
+
+// offset a row item
+@mixin offset($direction, $columns) {
+	@if $direction == left {
+		float: left;
+		margin-left: offset-columns($columns);
+	}
+	@if $direction == right {
+		float: right;
+		margin-right: offset-columns($columns);
+	}
+}
+
+// adjust the last element within the row
+@mixin last {
+	// remove margin-right from last element in a row or container so all columns fit
+	margin-right: 0;
+	// fixes poor alignment with right edge caused by percentage calculations
+	float: right;
+}
+
+// clearfix hack
+@mixin clearfix {
+	zoom: 1;
+	&:before, &:after { content: ""; display: table; }
+	&:after { clear: both; }
+}
