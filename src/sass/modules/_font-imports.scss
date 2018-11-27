@@ -1,0 +1,49 @@
+
+// IMPORT CUSTOM FONT FAMILIES
+// ==================================================
+
+// place your font files in THIS same folder,
+// the $font-path is relative to this location '../fonts/'
+@include _font-face(
+	$font-family: 'akzg-bold',
+	$font-path: '../fonts/',
+	$font-file-name: 'AkzidenzGrotesk-Bold',
+	$font-style: bold,
+	$font-weight: bold,
+	$font-svg-id: null,
+	$text-rendering: auto,
+	$font-formats: (otf: opentype)
+);
+
+@include _font-face(
+	$font-family: 'akzg-light',
+	$font-path: '../fonts/',
+	$font-file-name: 'AkzidenzGrotesk-Light',
+	$font-style: light,
+	$font-weight: light,
+	$font-svg-id: null,
+	$text-rendering: auto,
+	$font-formats: (otf: opentype)
+);
+
+@include _font-face(
+	$font-family: 'akzg-light-italic',
+	$font-path: '../fonts/',
+	$font-file-name: 'AkzidenzGrotesk-LightItalic',
+	$font-style: italic,
+	$font-weight: light,
+	$font-svg-id: null,
+	$text-rendering: auto,
+	$font-formats: (otf: opentype)
+);
+
+@include _font-face(
+	$font-family: 'akzg-super',
+	$font-path: '../fonts/',
+	$font-file-name: 'AkzidenzGrotesk-Super',
+	$font-style: bold,
+	$font-weight: bolder,
+	$font-svg-id: null,
+	$text-rendering: auto,
+	$font-formats: (otf: opentype)
+);

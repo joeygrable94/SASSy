@@ -31,7 +31,11 @@
 		@font-face {
 			font-family: '#{$font-family}';
 			@if (map-has-key($font-formats, eot)) {             // If there is an eot font (IE).
+<<<<<<< HEAD
 				src: url("#{$font-path}#{$font-file-name}.eot");  // Add `src` w/out `format` for older IE.
+=======
+				src: url('#{$font-path}#{$font-file-name}.eot');  // Add `src` w/out `format` for older IE.
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 			}
 			src: $font-src;
 			font-style: $font-style;

@@ -12,11 +12,15 @@
 	$full-screen-responsive: true;
 
 	// UPPER/LOWER LIMITS
+<<<<<<< HEAD
 	
+=======
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 	// SCREENS (mobile first)
 	$lower-limit-screen: 500px;
 	$middle-limit-screen: 720px;
 	$upper-limit-screen: 960px;
+<<<<<<< HEAD
 	
 	// DESKTOPS (large format monitors)
 	$lower-limit-desktop: 1280px;
@@ -27,10 +31,20 @@
 	
 	// FONTS
 	$lower-limit-font: 16px;
+=======
+	// DESKTOPS (large format monitors)
+	$lower-limit-desktop: 1280px;
+	// HEADER
+	$lower-limit-header: 50px;
+	$upper-limit-header: 100px;
+	// FONTS
+	$lower-limit-font: 15px;
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 	$upper-limit-font: 20px;
 
 	$em-root: 10px;
 	$font-root: percentage($em-root / 16px); // assuming font-size: 100% equates to 16px => 62.5%
+<<<<<<< HEAD
 	$modular-scale-ratio: 1;
 	$vertical-measure: $modular-scale-ratio * 1rem;
 
@@ -42,6 +56,18 @@
 
 	// BLOCK OPTIONS
 	$paragraph-indent: false;
+=======
+	$modular-scale-ratio: 1.2;
+	$vertical-measure: $modular-scale-ratio * 1rem;
+
+	// FONTS
+	$base-font-family: 'akzg-light', Helvetica, sans-serif;
+	$base-font-headers: 'akzg-light', Helvetica, sans-serif;
+	$base-font-mono: Consolas, "Courier New", Courier, monospace;
+
+	// BLOCK OPTIONS
+	$paragraph-indent: true;
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 	$paragraph-justify: false;
 
 
@@ -50,17 +76,29 @@
 
 // GRID
 // ---------------------------------------------------------------------------
+<<<<<<< HEAD
 	$grid-max-width:		1280px;						// set page max-width
 	$grid-column-width:		percentage(100/6);			// set column width
 	$grid-gutter-width:		3%;							// set gutter width
+=======
+	$grid-max-width:		$upper-limit-screen;		// set page max-width
+	$grid-column-width:		percentage(100/6);			// set column width
+	$grid-gutter-width:		0%;							// set gutter width
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 	$grid-max-columns:		12;							// set max number of columns
 
 	// CUSTOM PAGE GRID VARS
 	// nav width
+<<<<<<< HEAD
 	$nW: 320px;
 	// page width
 	// full screen Width - Width of navigation
 	$gW: calc(100% - #{$nW});
+=======
+	$nW: 60px;
+	// page width
+	$gW: calc(100vw - #{$nW} - #{$vertical-measure}); // full screen Width - Width of navigation
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 	// page height
 	$gH: 100vh;
 
@@ -70,6 +108,7 @@
 
 // COLORS
 // ---------------------------------------------------------------------------
+<<<<<<< HEAD
 // JG Blue: #2C4260
 // JG Brown: #8F5500
 	// palette
@@ -77,6 +116,13 @@
 	$color-secondary:	#8F5500 !default;
 	$color-shadow:		#3d3d3d !default;
 	$color-highlight:	#8d8d8d !default;
+=======
+	// palette
+	$color-primary:		#2C4260 !default; // blue
+	$color-secondary:	#8F5500 !default; // brown
+	$color-shadow:		#3d3d3d !default; // dark grey
+	$color-highlight:	#8d8d8d !default; // light grey
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 
 	// states
 	$color-success:		$green !default;
@@ -105,10 +151,17 @@
 // ELEMENTS
 // ---------------------------------------------------------------------------
 	// borders
+<<<<<<< HEAD
 	$border-width-default: 5px;
 	$border-style-default: solid;
 	$border-color-default: $black30;
 	$border-radius-default: 0px;
+=======
+	$border-width-default: 1px;
+	$border-style-default: solid;
+	$border-color-default: $black30;
+	$border-radius-default: 4px;
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 
 
 
@@ -158,7 +211,11 @@
 	$btn-font-size: inheret;
 	$btn-font-weight: 400;
 	$btn-border-radius: 2px;
+<<<<<<< HEAD
 	$btn-border-width: 5px;
+=======
+	$btn-border-width: 2px;
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 	$btn-border-style: solid;
 	$btn-border-color: $black;
 	$btn-link-disabled-color: $gray-silver;

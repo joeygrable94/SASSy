@@ -15,6 +15,7 @@
 			box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 // reset box hack
 @mixin reset() {
 	display: block;
@@ -25,6 +26,8 @@
 	vertical-align: baseline;
 }
 
+=======
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 // hide scrollbar
 @mixin scroll-hide() {
 	//&::-webkit-scrollbar { width: 0px; background: transparent; }
@@ -69,7 +72,11 @@
 	$weight: inherit,
 	$style: inherit
 ) {
+<<<<<<< HEAD
 	font-family: $family, Helvetica, sans-serif;
+=======
+	font-family: $family;
+>>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 	font-weight: $weight;
 	font-style: $style;
 }
