@@ -28,10 +28,7 @@ input, select, textarea {
 	@include form-input-base();
 	@include hover { cursor: pointer; }
 	@include form-input-focus();
-<<<<<<< HEAD
 	padding: linear-scale(1) !important;
-=======
->>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 
 	&:not(.btn) {
 		//padding: $vertical-measure;
@@ -56,7 +53,6 @@ input {
 	&[type=radio] {
 		-webkit-appearance: none !important;
 				appearance: none !important;
-<<<<<<< HEAD
 		display: inline-block !important;
 		position: relative !important;
 		width: linear-scale(2) !important;
@@ -64,14 +60,6 @@ input {
 		margin: 0;
 		margin-left: $vertical-measure !important;
 		margin-right: $vertical-measure !important;
-=======
-		display: inline-block;
-		position: relative;
-		width: linear-scale(2) !important;
-		height: linear-scale(2) !important;
-		margin-left: $vertical-measure;
-		margin-right: $vertical-measure;
->>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 		@include border();
 		@include border-radius($form-input-border-radius);
 		background-color: $transparent;
@@ -86,11 +74,7 @@ input {
 			content: '\2713';
 			font-size: 115%;
 			position: absolute;
-<<<<<<< HEAD
 			top: linear-scale(1) * -1;
-=======
-			top: linear-scale(3, down) * -1;
->>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 			left: linear-scale(4, down);
 		}
 	}

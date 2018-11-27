@@ -9,11 +9,7 @@ table {
 thead {
 	font-weight: bolder;
 	@include font-contrast(
-<<<<<<< HEAD
-		$family: 'akzg_bold',
-=======
 		$family: 'akzg-bold',
->>>>>>> b3cc1ea50fdd28d93c84556dd7a89fd251f7554d
 		$style: normal,
 		$weight: bold
 	);
